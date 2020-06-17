@@ -25,6 +25,10 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/upload-artifact@v2
+      with:
+        name: BuildArtifact
+        path: /home/runner/work/FingerPuppet/FingerPuppet/FingerPuppet/bin/Release/netcoreapp3.1/
     - uses: actions/checkout@v2
     - name: Pack nuget package
       run: dotnet pack --configuration Release
