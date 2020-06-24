@@ -27,11 +27,6 @@ jobs:
     - run: mkdir ${{ github.workspace }}/Artifacts
     - name: Pack nuget package
       run: dotnet pack FingerPuppet/FingerPuppet.csproj --no-restore --no-build --include-symbols --configuration Release -p:PackageVersion=2.1.0 -o ${{ github.workspace }}/Artifacts
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - run: ls ${{ github.workspace }}/Artifacts -l
     - uses: actions/upload-artifact@v2
       with:
         name: BuildArtifact
