@@ -32,4 +32,4 @@ jobs:
         name: BuildArtifact
         path:  ${{ github.workspace }}/Artifacts
     - name: Push generated package to GitHub registry
-      run: dotnet nuget push ${{ github.workspace }}/Artifacts/*.nupkg --skip-duplicate --no-symbols true
+      run: dotnet nuget push ${{ github.workspace }}/Artifacts/*.nupkg --skip-duplicate --api-key ${{secrets.NUGET_DEPLOY_KEY}}
