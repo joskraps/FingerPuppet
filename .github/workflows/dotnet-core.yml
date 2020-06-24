@@ -30,8 +30,8 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - run: ls ${{ github.workspace }}/FingerPuppet -l
+    - run: ls ${{ github.workspace }} -l
     - uses: actions/upload-artifact@v2
       with:
         name: BuildArtifact
-        path:  ${{ github.workspace }}/FingerPuppet/bin/Release
+        path:  ${{ github.workspace }}/bin/Release
