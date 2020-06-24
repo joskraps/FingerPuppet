@@ -19,9 +19,9 @@ jobs:
       env:
         NUGET_AUTH_TOKEN: ${{secrets.NUGET_DEPLOY_KEY}}
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore FingerPuppet/FingerPuppet.csproj
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build FingerPuppet/FingerPuppet.csproj --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
   deploy:
