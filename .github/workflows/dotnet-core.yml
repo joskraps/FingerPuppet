@@ -24,14 +24,15 @@ jobs:
       run: dotnet build FingerPuppet/FingerPuppet.csproj --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+    - run: mkdir ${{ github.workspace }}/Artifacts
     - name: Pack nuget package
-      run: dotnet pack FingerPuppet/FingerPuppet.csproj --no-restore --no-build --include-symbols --configuration Release -p:PackageVersion=2.1.0
+      run: dotnet pack FingerPuppet/FingerPuppet.csproj --no-restore --no-build --include-symbols --configuration Release -p:PackageVersion=2.1.0 -o ${{ github.workspace }}/Artifacts
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - run: ls ${{ github.workspace }} -l
+    - run: ls ${{ github.workspace }}/Artifacts -l
     - uses: actions/upload-artifact@v2
       with:
         name: BuildArtifact
-        path:  ${{ github.workspace }}/bin/Release
+        path:  ${{ github.workspace }}/Artifacts
