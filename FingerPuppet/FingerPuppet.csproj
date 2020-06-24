@@ -2,6 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <Version>0.0.1</Version>
+    <PackageProjectUrl>https://github.com/joskraps/FingerPuppet</PackageProjectUrl>
+    <Authors>Joel Sparks</Authors>
+    <Company />
+    <Description>WSQ decoding and fingerprint enrollment/matching</Description>
+    <RepositoryUrl>https://github.com/joskraps/FingerPuppet</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <PackageTags>WSQ FMD biometric fingerprint minutia</PackageTags>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
