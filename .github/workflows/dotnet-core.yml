@@ -15,6 +15,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
+        source-url: https://nuget.pkg.github.com/joskraps/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_DEPLOY_KEY}}
     - name: Install dependencies
       run: dotnet restore
     - name: Build
@@ -27,8 +30,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Pack nuget package
-      run: dotnet pack --configuration Release
+      run: dotnet pack FingerPuppet/FingerPuppet.csproj --no-restore --no-build --include-symbols --configuration Release -p:PackageVersion=2.1.0
     - uses: actions/upload-artifact@v2
       with:
         name: BuildArtifact
-        path: home/runner/work/FingerPuppet/FingerPuppet/FingerPuppet/bin/Release/*
+        path: FingerPuppet/bin/Release/FingerPuppet*.nupkg
