@@ -17,18 +17,23 @@ jobs:
         dotnet-version: 3.1.101
       env:
         NUGET_AUTH_TOKEN: ${{secrets.NUGET_DEPLOY_KEY}}
-    - name: Install dependencies
+    - name: Restore
       run: dotnet restore FingerPuppet/FingerPuppet.csproj
     - name: Build
       run: dotnet build FingerPuppet/FingerPuppet.csproj --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+    - name: Bump version
+      uses: SiqiLu/dotnet-bump-version@master
+      with:
+        version_file: FingerPuppet/FingerPuppet.csproj
+        github_token: ${{ secrets.GITHUB_TOKEN }}
     - run: mkdir ${{ github.workspace }}/Artifacts
-    - name: Pack nuget package
-      run: dotnet pack FingerPuppet/FingerPuppet.csproj --no-restore --no-build --include-symbols --configuration Release -p:PackageVersion=0.0.1 -o ${{ github.workspace }}/Artifacts
+    - name: Pack
+      run: dotnet pack FingerPuppet/FingerPuppet.csproj --no-restore --no-build --include-symbols --configuration Release -o ${{ github.workspace }}/Artifacts
     - uses: actions/upload-artifact@v2
       with:
-        name: BuildArtifact
+        name: Upload artifacts
         path:  ${{ github.workspace }}/Artifacts
-    - name: Push generated package to GitHub registry
+    - name: Push package
       run: dotnet nuget push ${{ github.workspace }}/Artifacts/*.nupkg --skip-duplicate -k ${{secrets.NUGET_DEPLOY_KEY}} -s https://api.nuget.org/v3/index.json
