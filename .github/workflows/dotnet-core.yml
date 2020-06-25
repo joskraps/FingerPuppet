@@ -23,11 +23,6 @@ jobs:
       run: dotnet build FingerPuppet/FingerPuppet.csproj --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
-    - name: Bump version
-      uses: SiqiLu/dotnet-bump-version@master
-      with:
-        version_file: FingerPuppet/FingerPuppet.csproj
-        github_token: ${{ secrets.GITHUB_TOKEN }}
     - run: mkdir ${{ github.workspace }}/Artifacts
     - name: Pack
       run: dotnet pack FingerPuppet/FingerPuppet.csproj --include-symbols --configuration Release -o ${{ github.workspace }}/Artifacts
