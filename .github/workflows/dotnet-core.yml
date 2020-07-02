@@ -31,4 +31,4 @@ jobs:
         name: Upload artifacts
         path:  ${{ github.workspace }}/Artifacts
     - name: Push package
-      run: dotnet nuget push ${{ github.workspace }}/Artifacts/*.nupkg --skip-duplicate -k ${{secrets.NUGET_DEPLOY_KEY}} -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push ${{ github.workspace }}/Artifacts/*.nupkg --skip-duplicate -n -k ${{secrets.NUGET_DEPLOY_KEY}} -s https://api.nuget.org/v3/index.json
